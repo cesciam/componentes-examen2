@@ -1,7 +1,9 @@
 package com.cenfotec.examen2.examen2.controller;
 
 import com.cenfotec.examen2.examen2.domain.Auditor;
+import com.cenfotec.examen2.examen2.domain.Cliente;
 import com.cenfotec.examen2.examen2.service.AuditorService;
+import com.cenfotec.examen2.examen2.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,19 +23,23 @@ public class IndexController {
     @Autowired
     AuditorService auditorService;
 
+    @Autowired
+    ClienteService clienteService;
+
     @RequestMapping ("/")
     public String index (Model model){
         return "index";
     }
 
+    // Mantenimiento de auditor
     @RequestMapping(value = "/agregarAuditor", method = RequestMethod.GET)
-    public String navegarPaginaInsertar(Model model){
+    public String navegarPaginaInsertarAuditor(Model model){
         model.addAttribute(new Auditor());
         return "/agregarAuditor";
     }
 
     @RequestMapping(value = "/agregarAuditor", method = RequestMethod.POST)
-    public String accionPaginaInsertar(Auditor auditor, BindingResult result, Model model){
+    public String accionPaginaInsertarAuditor(Auditor auditor, BindingResult result, Model model){
         if(auditor.getDisponibilidad().toLowerCase().equals("nd")){
             auditor.setDisponibilidad("No disponible");
         } else {
@@ -62,7 +68,7 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/editarAuditor/{id}")
-    public String irAEditar(Model model, @PathVariable int id) {
+    public String irAEditarAuditor(Model model, @PathVariable int id) {
         Optional<Auditor> auditorToEdit = auditorService.getById(id);
         if (auditorToEdit.isPresent()){
             model.addAttribute("auditorToEdit", auditorToEdit);
@@ -73,9 +79,29 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/editarAuditor/{id}", method = RequestMethod.POST)
-    public String guardarCambios(Auditor auditor, BindingResult result,Model model,
-                                 @PathVariable int id) {
+    public String guardarCambiosAuditor(Auditor auditor, BindingResult result,Model model, @PathVariable int id) {
         auditorService.updateAuditor(auditor);
         return "exito";
     }
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // Mantenimiento de clientes
+    @RequestMapping(value = "/agregarCliente", method = RequestMethod.GET)
+    public String navegarPaginaInsertarCliente(Model model){
+        model.addAttribute(new Cliente());
+        return "/agregarCliente";
+    }
+
+    @RequestMapping(value = "/agregarCliente", method = RequestMethod.POST)
+    public String accionPaginaInsertarCliente(Cliente cliente, BindingResult result, Model model){
+        clienteService.guardarCliente(cliente);
+        return "exito";
+    }
+    @RequestMapping("/verClientes")
+    public String verClientes (Model model){
+        model.addAttribute("cliente", clienteService.getAll());
+        return "verClientes";
+    }
+
+    
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 }

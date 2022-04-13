@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="Content-Type" content="text/html"></meta>
+    <title>Auditores</title>
+</head>
+<body>
+<div>
+    <ul>
+        <div th:each="entry,status : ${cliente}">
+            <li>
+                <div>
+                    <div>
+                        <h4>
+                            <span th:text="${entry.razonSocial}"></span>
+                        </h4>
+                        <p>
+                            C&eacute;dula Jur&iacute;dica:
+                            <span th:text="${entry.cedulaJuridica}"></span>
+                            <br>
+                            Direcci&oacute;n:
+                            <span th:text="${entry.direccion}"></span>
+                            <br>
+                            Tel&eacute;fono:
+                            <span th:text="${entry.telefono}"></span>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+                <a th:href="@{/agregarContacto/{id}(id=${entry.id})}">Agregar contactos</a>
+            </li>
+        </div>
+    </ul>
+</div>
+<a href="/">Volver al principal</a>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Agregar auditor</title>
+</head>
+<body>
+<h1>Insertar</h1>
+<form action="#" th:action="@{/agregarCliente}" th:object="${cliente}" method="post">
+    <label for="razonSocial">Raz&oacute;n Social</label>
+    <input type="text" th:field="*{razonSocial}"  id="razonSocial"/>
+    <label for="cedulaJuridica">C&eacute;dula Jur&iacute;dica</label>
+    <input type="text" th:field="*{cedulaJuridica}"  id="cedulaJuridica"/>
+    <br/>
+    <label for="direccion">Direcci&oacute;n</label>
+    <input type="text" th:field="*{direccion}"  id="direccion"/>
+    <label for="telefono">Tel&eacute;fono</label>
+    <input type="number" th:field="*{telefono}"  id="telefono"/>
+    </br>
+    <input type="submit" value="Registrar">
+</form>
+<a href="/">Volver al principal</a>
+</body>
+</html>
