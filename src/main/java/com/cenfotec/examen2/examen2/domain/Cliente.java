@@ -1,9 +1,7 @@
 package com.cenfotec.examen2.examen2.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Cliente {
@@ -14,6 +12,10 @@ public class Cliente {
     private String cedulaJuridica;
     private String direccion;
     private String telefono;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "CONTACTO_ID", referencedColumnName = "ID")
+    private List<Contacto> contactos;
 
     public Cliente(Long id, String razonSocial, String cedulaJuridica, String direccion, String telefono, String email) {
         this.id = id;
@@ -66,6 +68,13 @@ public class Cliente {
         this.telefono = telefono;
     }
 
+    public List<Contacto> getContactos() {
+        return contactos;
+    }
+
+    public void setContactos(List<Contacto> contactos) {
+        this.contactos = contactos;
+    }
 
     @Override
     public String toString() {

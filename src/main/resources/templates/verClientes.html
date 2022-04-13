@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8"></meta>
     <meta http-equiv="Content-Type" content="text/html"></meta>
-    <title>Auditores</title>
+    <title>Clientes</title>
 </head>
 <body>
 <div>
     <ul>
-        <div th:each="entry,status : ${cliente}">
+        <div th:each="entry,status : ${clientes}">
             <li>
                 <div>
                     <div>
@@ -27,6 +27,36 @@
                             <br>
                         </p>
                     </div>
+                </div>
+                <div>
+                    <h2>Contactos</h2>
+                    <ul>
+                        <div th:each="entry2,status : ${entry.getContactos()}">
+                            <li>
+                                <div>
+                                    <div>
+                                        <h4>
+                                            <span th:text="${entry2.nombre}"></span>
+                                            <span th:text="${entry2.apellido1}"></span>
+                                            <span th:text="${entry2.apellido2}"></span>
+                                        </h4>
+                                        <p>
+                                            Telefono:
+                                            <span th:text="${entry2.telefono}"></span>
+                                            <br>
+                                            Email:
+                                            <span th:text="${entry2.email}"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div>
+                                </div>
+                                <a th:href="@{/agregarContacto/{id}(id=${entry.id})}">Editar</a>
+                                <a>Eliminar</a>
+                            </li>
+                        </div>
+                    </ul>
+
                 </div>
                 <a th:href="@{/agregarContacto/{id}(id=${entry.id})}">Agregar contactos</a>
             </li>

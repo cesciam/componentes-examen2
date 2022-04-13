@@ -2,8 +2,10 @@ package com.cenfotec.examen2.examen2.controller;
 
 import com.cenfotec.examen2.examen2.domain.Auditor;
 import com.cenfotec.examen2.examen2.domain.Cliente;
+import com.cenfotec.examen2.examen2.domain.Contacto;
 import com.cenfotec.examen2.examen2.service.AuditorService;
 import com.cenfotec.examen2.examen2.service.ClienteService;
+import com.cenfotec.examen2.examen2.service.ContactoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,9 @@ public class IndexController {
 
     @Autowired
     ClienteService clienteService;
+
+    @Autowired
+    ContactoService contactoService;
 
     @RequestMapping ("/")
     public String index (Model model){
@@ -98,10 +103,26 @@ public class IndexController {
     }
     @RequestMapping("/verClientes")
     public String verClientes (Model model){
-        model.addAttribute("cliente", clienteService.getAll());
+        model.addAttribute("clientes", clienteService.getAll());
         return "verClientes";
     }
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // Mantenimiento de contactos
+    @RequestMapping(value = "/agregarContacto/{id}")
+    public String irFormContacto(Model model, @PathVariable int id) {
+        Optional<Cliente> cliente = clienteService.getById(id);
+        Contacto contacto = new Contacto();
+        contacto.setCliente(cliente.get());
+        model.addAttribute(contacto);
+        return "/agregarContacto";
+    }
 
-    
+    @RequestMapping(value = "/agregarContacto/{id}", method = RequestMethod.POST)
+    public String guardarContacto(Contacto contacto, BindingResult result,Model model, @PathVariable int id) {
+        Cliente clienteContac = clienteService.getById(id).get();
+        clienteContac.getContactos().add(contacto);
+        clienteService.updateCliente(clienteContac);
+        return "exito";
+    }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 }
