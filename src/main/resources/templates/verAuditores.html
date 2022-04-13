@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="Content-Type" content="text/html"></meta>
+    <title>Auditores</title>
+</head>
+<body>
+<div>
+    <ul>
+        <div th:each="entry,status : ${auditor}">
+            <li>
+                <div>
+                    <div>
+                        <h4>
+                            <span th:text="${entry.nombre}"></span>
+                            <span th:text="${entry.apellido1}"></span>
+                            <span th:text="${entry.apellido2}"></span>
+                        </h4>
+                        <p>
+                            Direcci&oacute;n:
+                            <span th:text="${entry.direccion}"></span>
+                            <br>
+                            Tel&eacute;fono:
+                            <span th:text="${entry.telefono}"></span>
+                            <br>
+                            Email:
+                            <span th:text="${entry.email}"></span>
+                            <br>
+                            Disponibilidad:
+                            <span th:text="${entry.disponibilidad}"></span>
+                            <br>
+                            Especialidad:
+                            <span th:text="${entry.especialidad}"></span>
+                            <br>
+                            Estado:
+                            <span th:text="${entry.estado}"></span>
+                        </p>
+                    </div>
+                </div>
+                <a th:href="@{/editarAuditor/{id}(id=${entry.id})}">Editar</a>
+            </li>
+        </div>
+    </ul>
+</div>
+<a href="/">Volver al principal</a>
+</body>
+</html>

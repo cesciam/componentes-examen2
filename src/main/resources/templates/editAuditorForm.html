@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Insertar</h1>
-<form action="#" th:action="@{/agregarAuditor}" th:object="${auditor}" method="post">
+<form action="#" th:action="@{/editarAuditor/{id}(id=${id})}" th:object="${auditorToEdit}" method="post">
     <label for="nombre">Nombre</label>
     <input type="text" th:field="*{nombre}"  id="nombre"/>
     <label for="apellido1">Apellido 1</label>
@@ -34,7 +34,13 @@
         <option th:value="SL">Seguridad Laboral</option>
         <option th:value="STI">Seguridad de TI</option>
     </select>
-    <input type="submit" value="Registrar">
+    <br/>
+    <label for="estado">Estado</label>
+    <select th:field="*{estado}" id="estado">
+        <option th:value="Activo">Activo</option>
+        <option th:value="Inactivo">Inactivo</option>
+    </select>
+    <input type="submit" value="Guardar">
 </form>
 <a href="/">Volver al principal</a>
 </body>

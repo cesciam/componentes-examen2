@@ -18,8 +18,10 @@ public class Auditor {
     private String telefono;
     private String email;
     private String disponibilidad;
+    private String especialidad;
+    private String estado;
 
-    public Auditor(Long id, String nombre, String apellido1, String apellido2, String direccion, String telefono, String email, String disponibilidad) {
+    public Auditor(Long id, String nombre, String apellido1, String apellido2, String direccion, String telefono, String email, String disponibilidad, String especialidad) {
         this.id = id;
         this.nombre = nombre;
         this.apellido1 = apellido1;
@@ -28,6 +30,7 @@ public class Auditor {
         this.telefono = telefono;
         this.email = email;
         this.disponibilidad = disponibilidad;
+        this.especialidad = especialidad;
     }
 
     public Auditor(){
@@ -92,6 +95,22 @@ public class Auditor {
 
     public String getDisponibilidad() {
         return disponibilidad;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public void setDisponibilidad(String disponibilidad) {
