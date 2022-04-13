@@ -30,4 +30,7 @@ public class ContactoService {
     public void updateContacto(Contacto contacto) {
         contactoRepository.save(contacto);
     }
+    public void deleteContacto(int id) {
+        contactoRepository.deleteById(Long.valueOf(id));
+    }
 }

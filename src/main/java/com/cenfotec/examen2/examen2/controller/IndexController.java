@@ -124,5 +124,31 @@ public class IndexController {
         clienteService.updateCliente(clienteContac);
         return "exito";
     }
+
+    @RequestMapping(value = "/editarContacto/{id}")
+    public String irAEditarContacto(Model model, @PathVariable int id) {
+        Optional<Contacto> contactoToEdit = contactoService.getById(id);
+        if (contactoToEdit.isPresent()){
+            model.addAttribute("contactoToEdit", contactoToEdit);
+            return "editContactoForm";
+        } else {
+            return "notFound";
+        }
+    }
+
+    @RequestMapping(value = "/editarContacto/{id}", method = RequestMethod.POST)
+    public String guardarCambiosContacto(Contacto contacto, BindingResult result,Model model, @PathVariable int id) {
+        Optional<Contacto> contactoBefore = contactoService.getById(id);
+        contacto.setCliente(contactoBefore.get().getCliente());
+        contactoService.updateContacto(contacto);
+        return "exito";
+    }
+
+    @RequestMapping(value = "/borrarContacto/{id}")
+    public String borrar(Model model, @PathVariable int id) {
+        contactoService.deleteContacto(id);
+        List<Contacto> contactos = contactoService.getAll();
+        return "exito";
+    }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 }

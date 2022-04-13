@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en-US" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Agregar auditor</title>
+    <title>Editar auditor</title>
 </head>
 <body>
-<h1>Insertar</h1>
+<h1>Editar</h1>
 <form action="#" th:action="@{/editarAuditor/{id}(id=${id})}" th:object="${auditorToEdit}" method="post">
     <label for="nombre">Nombre</label>
     <input type="text" th:field="*{nombre}"  id="nombre"/>
