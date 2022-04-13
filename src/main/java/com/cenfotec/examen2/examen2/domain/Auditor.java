@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class Auditor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,14 +19,7 @@ public class Auditor {
     private String email;
     private String disponibilidad;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID")
-    private List<Author> authors;
-
-    @Transient
-    private SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-
-    public Auditor(Long id, String nombre, String apellido1, String apellido2, String direccion, String telefono, String email, String disponibilidad, List<Author> authors, SimpleDateFormat format) {
+    public Auditor(Long id, String nombre, String apellido1, String apellido2, String direccion, String telefono, String email, String disponibilidad) {
         this.id = id;
         this.nombre = nombre;
         this.apellido1 = apellido1;
@@ -34,8 +28,6 @@ public class Auditor {
         this.telefono = telefono;
         this.email = email;
         this.disponibilidad = disponibilidad;
-        this.authors = authors;
-        this.format = format;
     }
 
     public Auditor(){
@@ -105,23 +97,6 @@ public class Auditor {
     public void setDisponibilidad(String disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
-
-    public List<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
-
-    public SimpleDateFormat getFormat() {
-        return format;
-    }
-
-    public void setFormat(SimpleDateFormat format) {
-        this.format = format;
-    }
-
     @Override
     public String toString() {
         return "Auditor{" +
@@ -133,8 +108,6 @@ public class Auditor {
                 ", telefono='" + telefono + '\'' +
                 ", email='" + email + '\'' +
                 ", disponibilidad='" + disponibilidad + '\'' +
-                ", authors=" + authors +
-                ", format=" + format +
                 '}';
     }
 }
