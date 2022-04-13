@@ -146,8 +146,10 @@ public class IndexController {
 
     @RequestMapping(value = "/borrarContacto/{id}")
     public String borrar(Model model, @PathVariable int id) {
-        contactoService.deleteContacto(id);
-        List<Contacto> contactos = contactoService.getAll();
+        Contacto contactoToDelete = contactoService.getById(id).get();
+        Cliente cliente = contactoToDelete.getCliente();
+        cliente.getContactos().remove(contactoToDelete);
+        clienteService.updateCliente(cliente);
         return "exito";
     }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
