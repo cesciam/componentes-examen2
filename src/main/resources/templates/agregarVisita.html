@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Agregar Cliente</title>
+</head>
+<body>
+<h1>Insertar</h1>
+<form action="#" th:action="@{/agregarVisita}" th:object="${visita}" method="post">
+    <label for="nombre">Nombre visita</label>
+    <input type="text" th:field="*{nombre}"  id="nombre"/>
+    </br>
+    <label for="fecha">Fecha</label>
+    <input type="date" th:field="*{fecha}"  id="fecha"/>
+    </br>
+    <label for="auditor">Auditor</label>
+    <select id="auditor" >
+            <option th:each="auditor: ${auditores}" th:value="${auditor}" th:text="${auditor.nombre}"></option>
+    </select>
+    </br>
+    <label for="cliente">Cliente</label>
+    <select id="cliente" >
+        <option th:each="cliente: ${clientes}" th:value="${cliente}" th:text="${cliente.razonSocial}"></option>
+    </select>
+    </br>
+    <input type="submit" value="Registrar">
+</form>
+<a href="/">Volver al principal</a>
+</body>
+</html>

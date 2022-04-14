@@ -3,9 +3,11 @@ package com.cenfotec.examen2.examen2.controller;
 import com.cenfotec.examen2.examen2.domain.Auditor;
 import com.cenfotec.examen2.examen2.domain.Cliente;
 import com.cenfotec.examen2.examen2.domain.Contacto;
+import com.cenfotec.examen2.examen2.domain.Visita;
 import com.cenfotec.examen2.examen2.service.AuditorService;
 import com.cenfotec.examen2.examen2.service.ClienteService;
 import com.cenfotec.examen2.examen2.service.ContactoService;
+import com.cenfotec.examen2.examen2.service.VisitaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +32,9 @@ public class IndexController {
 
     @Autowired
     ContactoService contactoService;
+
+    @Autowired
+    VisitaService visitaService;
 
     @RequestMapping ("/")
     public String index (Model model){
@@ -153,4 +158,26 @@ public class IndexController {
         return "exito";
     }
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // Mantenimiento de visitas de trabajo
+
+    @RequestMapping("/agregarVisita")
+    public String agregarVisita (Model model){
+        model.addAttribute("auditores", auditorService.getAll());
+        model.addAttribute("clientes", clienteService.getAll());
+        model.addAttribute(new Visita());
+        return "agregarVisita";
+    }
+
+    @RequestMapping(value = "/agregarVisita", method = RequestMethod.POST)
+    public String accionPaginaInsertarVisita(Visita visita, BindingResult result, Model model){
+        visitaService.guardarVisita(visita);
+        return "exito";
+    }
+
+    @RequestMapping("/verVisitas")
+    public String verVisitas (Model model){
+        List<Visita> visitas =  visitaService.getAll();
+        model.addAttribute("visitas", visitaService.getAll());
+        return "verVisitas";
+    }
 }

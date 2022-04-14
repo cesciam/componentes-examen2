@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="Content-Type" content="text/html"></meta>
+    <title>Auditores</title>
+</head>
+<body>
+<div>
+    <ul>
+        <div th:each="entry,status : ${visitas}">
+            <li>
+                <div>
+                    <div>
+                        <h4>
+                            <span th:text="${entry.nombre}"></span>
+                        </h4>
+                        <p>
+                            Direcci&oacute;n:
+                            <span th:text="${entry.fecha}"></span>
+                            <br>
+                            Auditor
+                            <span th:text="${entry.auditor.nombre}"></span>
+                            <br>
+                            Cliente
+                            <span th:text="${entry.cliente.razonSocial}"></span>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+            </li>
+        </div>
+    </ul>
+</div>
+<a href="/">Volver al principal</a>
+</body>
+</html>
